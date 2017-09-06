@@ -6,17 +6,22 @@
 //  Copyright © 2017年 魏乾坤. All rights reserved.
 //
 
-#import "AppDelegate.h"
+#import "WQKAppDelegate.h"
 
-@interface AppDelegate ()
+@interface WQKAppDelegate ()
 
 @end
 
-@implementation AppDelegate
+@implementation WQKAppDelegate
 
-
-- (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
+- (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
+{
     // Override point for customization after application launch.
+    self.window = [[UIWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];
+    [_window setBackgroundColor:[UIColor darkGrayColor]];
+    UINavigationController *navc = [[UINavigationController alloc] initWithRootViewController:[NSClassFromString(@"WQKOriginVC") new]];
+    [_window setRootViewController:navc];
+    [_window makeKeyAndVisible];
     return YES;
 }
 
@@ -94,5 +99,9 @@
         abort();
     }
 }
+//- (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event
+//{
+//    
+//}
 
 @end

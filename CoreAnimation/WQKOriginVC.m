@@ -6,13 +6,13 @@
 //  Copyright © 2017年 魏乾坤. All rights reserved.
 //
 
-#import "ViewController.h"
+#import "WQKOriginVC.h"
 
-@interface ViewController ()
+@interface  WQKOriginVC()
 
 @end
 
-@implementation ViewController
+@implementation WQKOriginVC
 
 - (void)viewDidLoad {
     [super viewDidLoad];

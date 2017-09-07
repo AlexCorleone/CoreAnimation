@@ -1,15 +1,13 @@
 //
-//  ViewController.h
+//  WQKBaseTableView.h
 //  CoreAnimation
 //
-//  Created by AlexCorleone on 2017/9/5.
+//  Created by AlexCorleone on 2017/9/7.
 //  Copyright © 2017年 魏乾坤. All rights reserved.
 //
 
 #import <UIKit/UIKit.h>
 
-@interface WQKOriginVC : UIViewController
-
+@interface WQKBaseTableView : UIView
 
 @end
-

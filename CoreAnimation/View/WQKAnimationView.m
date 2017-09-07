@@ -12,7 +12,6 @@
 
 @interface WQKAnimationView ()
 
-@property (nonatomic, strong) YSCWaterWaveView *waterWave;
 @property (nonatomic, strong) UIImageView *springImageView;
 
 @end
@@ -23,61 +22,75 @@
     self = [super initWithFrame:frame];
     if (self)
     {
-        [self setBackgroundColor:[UIColor lightTextColor]];
-//        [self configWaveView];
+        [self setBackgroundColor:[UIColor darkGrayColor]];
         [self addSubview:self.springImageView];
     }
     return self;
 }
 
-- (void)configWaveView
-{
-    //show
-    [self addSubview:self.waterWave];
-    [self.waterWave startWave];
-}
-
-- (YSCWaterWaveView *)waterWave
-{
-    if (!_waterWave) {
-        self.waterWave = [[YSCWaterWaveView alloc] init];
-        _waterWave.frame = CGRectMake(0, 0, self.bounds.size.width, self.bounds.size.height);
-        _waterWave.layer.cornerRadius = _waterWave.frame.size.width / 2.;
-        _waterWave.layer.borderColor = [UIColor whiteColor].CGColor;
-        _waterWave.layer.borderWidth = 0.8;
-        _waterWave.percent = 0.3;
-        _waterWave.firstWaveColor = [UIColor colorWithRed:146/255.0 green:148/255.0 blue:216/255.0 alpha:1.0];
-        _waterWave.secondWaveColor = [UIColor colorWithRed:84/255.0 green:87/255.0 blue:197/255.0 alpha:1.0];
-    }
-    
-    return _waterWave;
-}
-
+#pragma mark - setter && getter
 - (UIImageView *)springImageView
 {
     if (!_springImageView)
     {
         self.springImageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"spring_ThumbUp_Image"]];
         [_springImageView setFrame:self.bounds];
-//        [_springImageView setBackgroundColor:[UIColor lightGrayColor]];
-        [_springImageView setUserInteractionEnabled:YES];
-        UITapGestureRecognizer *tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(thumpUpImageTap:)];
-        [_springImageView addGestureRecognizer:tapGesture];
     }
     return _springImageView;
 }
 
-#pragma mark - private Method
-- (void)thumpUpImageTap:(UIGestureRecognizer *)gesture
+- (void)setAnimationType:(WQKAnimationViewType)animationType
 {
-    [self springAnimationViewWith:1.4 duration:1];
-    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-        [self keyFrameAnimationWith:[self createKeyFramePath] duration:7];
-    });
-    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(8 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-        [self flipAnimationView];
-    });
-    
+    NSLog(@"%@", self.layer.animationKeys);
+    switch (animationType) {
+        case WQKAnimationViewGroup:
+            [self WQKAnimationViewGroup];
+            break;
+        case WQKAnimationViewFlitX:
+            [self WQKAnimationViewFlitX];
+            break;
+        case WQKAnimationViewFlitY:
+            [self WQKAnimationViewFlitY];
+            break;
+        case WQKAnimationViewFlitZ:
+            [self WQKAnimationViewFlitZ];
+            break;
+        case WQKAnimationViewBasicScale:
+            [self WQKAnimationViewBasicScale];
+            break;
+ 
+        default:
+            break;
+    }
+}
+
+#pragma mark - private Method
+- (void)WQKAnimationViewGroup
+{
+    CASpringAnimation *scaleAni = (CASpringAnimation *)[self springAnimationViewWith:1.4 duration:1];
+    CAKeyframeAnimation *keyFrameAni = (CAKeyframeAnimation *)[self keyFrameAnimationWith:[self createKeyFramePath] duration:7];
+    CASpringAnimation *flipAni = (CASpringAnimation *)[self flipAnimationViewWithY];
+    [self groupAnimationWith:@[scaleAni, keyFrameAni, flipAni]];
+}
+
+- (void)WQKAnimationViewFlitX
+{
+    [self.layer addAnimation:[self flipAnimationViewWithX] forKey:@"Alex.FlipX"];
+}
+- (void)WQKAnimationViewFlitY
+{
+    [self.layer addAnimation:[self flipAnimationViewWithY] forKey:@"Alex.FlipY"];
+}
+
+- (void)WQKAnimationViewFlitZ
+{
+    [self.layer addAnimation:[self flipAnimationViewWithZ] forKey:@"Alex.FlipZ"];
+}
+
+- (void)WQKAnimationViewBasicScale
+{
+    [self.layer addAnimation:[self basicAnimationViewWith:1.5 duration:2] forKey:@"Alex.BasicScale"];
+
 }
 
 - (CGPathRef)createKeyFramePath
@@ -92,4 +105,5 @@
     [path addLineToPoint:CGPointMake(X, Y)];
     return path.CGPath;
 }
+
 @end

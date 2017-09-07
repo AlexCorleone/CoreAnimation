@@ -19,7 +19,7 @@
     // Override point for customization after application launch.
     self.window = [[UIWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];
     [_window setBackgroundColor:[UIColor darkGrayColor]];
-    UINavigationController *navc = [[UINavigationController alloc] initWithRootViewController:[NSClassFromString(@"WQKOriginVC") new]];
+    UINavigationController *navc = [[UINavigationController alloc] initWithRootViewController:[NSClassFromString(@"WQKAnimationVC") new]];
     [_window setRootViewController:navc];
     [_window makeKeyAndVisible];
     return YES;

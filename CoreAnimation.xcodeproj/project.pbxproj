@@ -14,11 +14,13 @@
 		296BFB9C1F5E7959009010B2 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 296BFB9A1F5E7959009010B2 /* LaunchScreen.storyboard */; };
 		296BFBA71F5E795A009010B2 /* CoreAnimationTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 296BFBA61F5E795A009010B2 /* CoreAnimationTests.m */; };
 		296BFBB21F5E795A009010B2 /* CoreAnimationUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 296BFBB11F5E795A009010B2 /* CoreAnimationUITests.m */; };
-		296BFBC21F5E7B43009010B2 /* WQKOriginVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 296BFBC11F5E7B43009010B2 /* WQKOriginVC.m */; };
+		296BFBC21F5E7B43009010B2 /* WQKAnimationVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 296BFBC11F5E7B43009010B2 /* WQKAnimationVC.m */; };
 		298D0F841F5E7DCD001ACDCB /* WQKAnimationView.m in Sources */ = {isa = PBXBuildFile; fileRef = 298D0F831F5E7DCD001ACDCB /* WQKAnimationView.m */; };
 		298D0F881F5E8FCF001ACDCB /* YSCWaterWaveView.m in Sources */ = {isa = PBXBuildFile; fileRef = 298D0F871F5E8FCF001ACDCB /* YSCWaterWaveView.m */; };
 		298D0F8C1F5F8894001ACDCB /* UIView+WQKAnimationView.m in Sources */ = {isa = PBXBuildFile; fileRef = 298D0F8B1F5F8894001ACDCB /* UIView+WQKAnimationView.m */; };
 		29B02F471F5FD78400416D6F /* WQKLayerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 29B02F461F5FD78400416D6F /* WQKLayerView.m */; };
+		29BA1E4B1F60D7E800097635 /* WQKLayerVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 29BA1E4A1F60D7E800097635 /* WQKLayerVC.m */; };
+		29BA1E511F60E68A00097635 /* WQKBaseTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 29BA1E501F60E68A00097635 /* WQKBaseTableView.m */; };
 		50008FEB6069AF890AF74723 /* libPods-CoreAnimationUITests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3745C8AD121D9FE776896061 /* libPods-CoreAnimationUITests.a */; };
 		583FBF2108A16B7D817464A1 /* libPods-CoreAnimation.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 00CA3AF9E9C34D8E1880E466 /* libPods-CoreAnimation.a */; };
 		DA8AA5774ADA1271E4447DA0 /* libPods-CoreAnimationTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 24A9B4BFFF06CCF7A094C6C4 /* libPods-CoreAnimationTests.a */; };
@@ -59,8 +61,8 @@
 		296BFBAD1F5E795A009010B2 /* CoreAnimationUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CoreAnimationUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		296BFBB11F5E795A009010B2 /* CoreAnimationUITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CoreAnimationUITests.m; sourceTree = "<group>"; };
 		296BFBB31F5E795A009010B2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		296BFBC01F5E7B43009010B2 /* WQKOriginVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WQKOriginVC.h; sourceTree = "<group>"; };
-		296BFBC11F5E7B43009010B2 /* WQKOriginVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WQKOriginVC.m; sourceTree = "<group>"; };
+		296BFBC01F5E7B43009010B2 /* WQKAnimationVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WQKAnimationVC.h; sourceTree = "<group>"; };
+		296BFBC11F5E7B43009010B2 /* WQKAnimationVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WQKAnimationVC.m; sourceTree = "<group>"; };
 		298D0F821F5E7DCD001ACDCB /* WQKAnimationView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WQKAnimationView.h; sourceTree = "<group>"; };
 		298D0F831F5E7DCD001ACDCB /* WQKAnimationView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WQKAnimationView.m; sourceTree = "<group>"; };
 		298D0F861F5E8FCF001ACDCB /* YSCWaterWaveView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YSCWaterWaveView.h; sourceTree = "<group>"; };
@@ -69,6 +71,10 @@
 		298D0F8B1F5F8894001ACDCB /* UIView+WQKAnimationView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+WQKAnimationView.m"; sourceTree = "<group>"; };
 		29B02F451F5FD78400416D6F /* WQKLayerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WQKLayerView.h; sourceTree = "<group>"; };
 		29B02F461F5FD78400416D6F /* WQKLayerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WQKLayerView.m; sourceTree = "<group>"; };
+		29BA1E491F60D7E800097635 /* WQKLayerVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WQKLayerVC.h; sourceTree = "<group>"; };
+		29BA1E4A1F60D7E800097635 /* WQKLayerVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WQKLayerVC.m; sourceTree = "<group>"; };
+		29BA1E4F1F60E68A00097635 /* WQKBaseTableView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WQKBaseTableView.h; sourceTree = "<group>"; };
+		29BA1E501F60E68A00097635 /* WQKBaseTableView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WQKBaseTableView.m; sourceTree = "<group>"; };
 		3745C8AD121D9FE776896061 /* libPods-CoreAnimationUITests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-CoreAnimationUITests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		44A74677139480E8D093DB7F /* Pods-CoreAnimationTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CoreAnimationTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-CoreAnimationTests/Pods-CoreAnimationTests.debug.xcconfig"; sourceTree = "<group>"; };
 		5C222C5687BCA6CD38E068BB /* Pods-CoreAnimation.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CoreAnimation.debug.xcconfig"; path = "Pods/Target Support Files/Pods-CoreAnimation/Pods-CoreAnimation.debug.xcconfig"; sourceTree = "<group>"; };
@@ -186,8 +192,10 @@
 		296BFBBF1F5E7B10009010B2 /* ViewController */ = {
 			isa = PBXGroup;
 			children = (
-				296BFBC01F5E7B43009010B2 /* WQKOriginVC.h */,
-				296BFBC11F5E7B43009010B2 /* WQKOriginVC.m */,
+				296BFBC01F5E7B43009010B2 /* WQKAnimationVC.h */,
+				296BFBC11F5E7B43009010B2 /* WQKAnimationVC.m */,
+				29BA1E491F60D7E800097635 /* WQKLayerVC.h */,
+				29BA1E4A1F60D7E800097635 /* WQKLayerVC.m */,
 			);
 			path = ViewController;
 			sourceTree = "<group>";
@@ -206,6 +214,8 @@
 				298D0F831F5E7DCD001ACDCB /* WQKAnimationView.m */,
 				29B02F451F5FD78400416D6F /* WQKLayerView.h */,
 				29B02F461F5FD78400416D6F /* WQKLayerView.m */,
+				29BA1E4F1F60E68A00097635 /* WQKBaseTableView.h */,
+				29BA1E501F60E68A00097635 /* WQKBaseTableView.m */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -540,8 +550,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				296BFBC21F5E7B43009010B2 /* WQKOriginVC.m in Sources */,
+				296BFBC21F5E7B43009010B2 /* WQKAnimationVC.m in Sources */,
 				296BFB8E1F5E7959009010B2 /* WQKAppDelegate.m in Sources */,
+				29BA1E511F60E68A00097635 /* WQKBaseTableView.m in Sources */,
+				29BA1E4B1F60D7E800097635 /* WQKLayerVC.m in Sources */,
 				29B02F471F5FD78400416D6F /* WQKLayerView.m in Sources */,
 				296BFB8B1F5E7959009010B2 /* main.m in Sources */,
 				298D0F841F5E7DCD001ACDCB /* WQKAnimationView.m in Sources */,

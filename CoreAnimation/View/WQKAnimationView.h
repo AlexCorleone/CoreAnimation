@@ -8,6 +8,15 @@
 
 #import <UIKit/UIKit.h>
 
+typedef enum : NSUInteger {
+    WQKAnimationViewGroup,
+    WQKAnimationViewFlitX,
+    WQKAnimationViewFlitY,
+    WQKAnimationViewFlitZ,
+    WQKAnimationViewBasicScale
+} WQKAnimationViewType;
 @interface WQKAnimationView : UIView
+
+@property (nonatomic, assign) WQKAnimationViewType animationType;
 
 @end

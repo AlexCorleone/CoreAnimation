@@ -7,6 +7,7 @@
 //
 
 #import "WQKLayerView.h"
+#import "UIView+WQKAnimationView.h"
 
 @interface WQKLayerView ()
 
@@ -21,6 +22,7 @@
     self = [super initWithFrame:frame];
     if (self)
     {
+        [self setBackgroundColor:[UIColor darkGrayColor]];
         switch (type)
         {
             case WQKLayerViewGradientLayer:
@@ -37,6 +39,11 @@
                 [self configEmitterLayer];
             }
                 break;
+            case WQKLayerViewTransformLayer:
+            {
+                [self configTransformLayer];
+            }
+                break;
             case WQKLayerViewDefault:
             {
                 
@@ -48,7 +55,7 @@
 
 - (instancetype)initWithFrame:(CGRect)frame
 {
-    return [self initWithFrame:frame layerType:WQKLayerViewEmitterLayer];
+    return [self initWithFrame:frame layerType:WQKLayerViewTransformLayer];
 }
 
 - (void)configGradientLayer
@@ -81,7 +88,6 @@
     {
         [path addLineToPoint:pointValue.CGPointValue];
     }
-//    [path addArcWithCenter:CGPointMake(200, 200) radius:self.bounds.size.width / 2. / 4 startAngle:0 endAngle:M_PI * 2 clockwise:NO];
     self.circlePath = path;
     CAShapeLayer *shapLayer = [CAShapeLayer layer];
     [shapLayer setFrame:self.bounds];
@@ -121,7 +127,7 @@
     
     CAEmitterCell *cell = [CAEmitterCell emitterCell];
     cell.color = [UIColor lightGrayColor].CGColor;
-    cell.birthRate = 1;
+    cell.birthRate = 4;
     cell.scale = 0.3; //离子的大小比例
     cell.lifetime = 3.0;//离子生命时间
     cell.alphaSpeed = -0.4; //离子隐藏的速度
@@ -132,12 +138,36 @@
     [emitterLayer setEmitterCells:@[cell]];
     [emitterLayer setTransform:CATransform3DMakeRotation(-70, 0, 0, 1)];
     
-    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(4 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-        [emitterLayer removeFromSuperlayer];
-        NSLog(@"粒子发送结束");
-    });
+//    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(4 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+//        [emitterLayer removeFromSuperlayer];
+//        NSLog(@"粒子发送结束");
+//    });
     
 }
 
+- (void)configTransformLayer
+{
+    CALayer *firstLayer = [CALayer layer];
+    [firstLayer setFrame:CGRectMake(0, 0, 100, 100)];
+    [firstLayer setBackgroundColor:[UIColor purpleColor].CGColor];
+    firstLayer.transform = CATransform3DMakeRotation(M_PI_4, 1, 1, 1);
+
+    CALayer *secondLayer = [CALayer layer];
+    [secondLayer setFrame:CGRectMake(0, 0, 100, 100)];
+    [secondLayer setBackgroundColor:[UIColor darkGrayColor].CGColor];
+    secondLayer.transform = CATransform3DMakeRotation(M_PI_2, 1, 1, 1);
+    
+    CATransformLayer *transFromLayer = [CATransformLayer layer];
+    [transFromLayer setFrame:CGRectMake(30, 30, 100, 100)];
+    [transFromLayer addSublayer:firstLayer];
+    [transFromLayer addSublayer:secondLayer];
+    [self.layer addSublayer:transFromLayer];
+    
+}
+
+- (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event
+{
+    [self.layer addAnimation:[self flipAnimationViewWithY] forKey:@"jbcsdsd"];
+}
 
 @end

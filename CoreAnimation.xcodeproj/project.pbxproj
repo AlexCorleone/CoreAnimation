@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2944461A1F66763100013600 /* WQKAnimationBGVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 294446191F66763100013600 /* WQKAnimationBGVC.m */; };
 		296BFB8B1F5E7959009010B2 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 296BFB8A1F5E7959009010B2 /* main.m */; };
 		296BFB8E1F5E7959009010B2 /* WQKAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 296BFB8D1F5E7959009010B2 /* WQKAppDelegate.m */; };
 		296BFB971F5E7959009010B2 /* CoreAnimation.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 296BFB951F5E7959009010B2 /* CoreAnimation.xcdatamodeld */; };
@@ -47,6 +48,8 @@
 		00CA3AF9E9C34D8E1880E466 /* libPods-CoreAnimation.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-CoreAnimation.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		0FE57849B1A066D2B4117ECF /* Pods-CoreAnimationTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CoreAnimationTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-CoreAnimationTests/Pods-CoreAnimationTests.release.xcconfig"; sourceTree = "<group>"; };
 		24A9B4BFFF06CCF7A094C6C4 /* libPods-CoreAnimationTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-CoreAnimationTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		294446181F66763100013600 /* WQKAnimationBGVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WQKAnimationBGVC.h; sourceTree = "<group>"; };
+		294446191F66763100013600 /* WQKAnimationBGVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WQKAnimationBGVC.m; sourceTree = "<group>"; };
 		296BFB861F5E7959009010B2 /* CoreAnimation.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CoreAnimation.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		296BFB8A1F5E7959009010B2 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		296BFB8C1F5E7959009010B2 /* WQKAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WQKAppDelegate.h; sourceTree = "<group>"; };
@@ -194,6 +197,8 @@
 			children = (
 				296BFBC01F5E7B43009010B2 /* WQKAnimationVC.h */,
 				296BFBC11F5E7B43009010B2 /* WQKAnimationVC.m */,
+				294446181F66763100013600 /* WQKAnimationBGVC.h */,
+				294446191F66763100013600 /* WQKAnimationBGVC.m */,
 				29BA1E491F60D7E800097635 /* WQKLayerVC.h */,
 				29BA1E4A1F60D7E800097635 /* WQKLayerVC.m */,
 			);
@@ -550,6 +555,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2944461A1F66763100013600 /* WQKAnimationBGVC.m in Sources */,
 				296BFBC21F5E7B43009010B2 /* WQKAnimationVC.m in Sources */,
 				296BFB8E1F5E7959009010B2 /* WQKAppDelegate.m in Sources */,
 				29BA1E511F60E68A00097635 /* WQKBaseTableView.m in Sources */,

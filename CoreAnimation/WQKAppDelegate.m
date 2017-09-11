@@ -7,8 +7,10 @@
 //
 
 #import "WQKAppDelegate.h"
+#import "WQKAnimationBGVC.h"
 
 @interface WQKAppDelegate ()
+
 
 @end
 
@@ -19,12 +21,33 @@
     // Override point for customization after application launch.
     self.window = [[UIWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];
     [_window setBackgroundColor:[UIColor darkGrayColor]];
-    UINavigationController *navc = [[UINavigationController alloc] initWithRootViewController:[NSClassFromString(@"WQKAnimationVC") new]];
-    [_window setRootViewController:navc];
+
+    [self switchRootVCWith:YES];
     [_window makeKeyAndVisible];
     return YES;
 }
 
+- (void)switchRootVCWith:(BOOL)flag
+{
+    if (!_fogrountNavc)
+    {
+        self.fogrountNavc = [[UINavigationController alloc] initWithRootViewController:[NSClassFromString(@"WQKAnimationVC") new]];
+    }
+    if (!_backgountNavc)
+    {
+        WQKAnimationBGVC *bgVC = [[WQKAnimationBGVC alloc] init];
+        self.backgountNavc = [[UINavigationController alloc] initWithRootViewController:bgVC];
+        [_backgountNavc.navigationItem setTitle:@"WQKAnimationBGVC"];
+        [_backgountNavc.view setBackgroundColor:[UIColor purpleColor]];
+    }
+    if (flag)
+    {
+        [_window setRootViewController:_fogrountNavc];
+    }else
+    {
+        [_window setRootViewController:_backgountNavc];
+    }
+}
 
 - (void)applicationWillResignActive:(UIApplication *)application {
     // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.

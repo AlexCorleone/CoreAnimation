@@ -19,7 +19,11 @@
                               duration:(CGFloat)duration;
 //翻转视图 - > 左右翻转 Y翻转
 - (CAAnimation *)flipAnimationViewWithY;
+- (CAAnimation *)flipViewWithYWithChangeContentBlock:(void(^)(void))changeBlock;
+
 - (CAAnimation *)flipAnimationViewWithX;
+- (CAAnimation *)flipViewWithXWithChangeContentBlock:(void(^)(void))changeBlock;
+
 - (CAAnimation *)flipAnimationViewWithZ;
 
 - (CAAnimationGroup *)groupAnimationWith:(NSArray <CAAnimation *>*)animations;

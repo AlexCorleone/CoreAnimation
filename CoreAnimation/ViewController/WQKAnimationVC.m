@@ -9,7 +9,13 @@
 #import "WQKAnimationVC.h"
 #import "WQKAnimationView.h"
 #import "WQKLayerVC.h"
+#import "UIView+WQKAnimationView.h"
+#import "WQKAppDelegate.h"
+
 @interface  WQKAnimationVC()<UITableViewDelegate, UITableViewDataSource>
+{
+}
+@property (nonatomic, strong) UIImageView *animationImageView;
 
 @property (nonatomic, strong) WQKAnimationView *animationView;
 
@@ -21,13 +27,26 @@
 
 @implementation WQKAnimationVC
 
++(void)load
+{
+    
+}
++(void)initialize
+{
+    
+}
 - (void)viewDidLoad
 {
     [super viewDidLoad];
     [self.navigationItem setTitle:@"Animation"];
     [self.view setBackgroundColor:[UIColor whiteColor]];
     [self configRightBarButtomItem];
-    [self.view addSubview:self.animationView];
+//    WQKAppDelegate *delegate = (WQKAppDelegate *)[UIApplication sharedApplication].delegate;
+//    [self.view insertSubview:delegate.backgountNavc.viewControllers.firstObject.view atIndex:0];
+//    [self.navigationController addChildViewController:delegate.backgountNavc.viewControllers.firstObject];
+//    [delegate.backgountNavc.viewControllers.firstObject.view removeFromSuperview];
+//    [delegate.backgountNavc.viewControllers.firstObject removeFromParentViewController];
+    [self.view insertSubview:self.animationView atIndex:1];
     [self.view insertSubview:self.animationTableView atIndex:0];
 }
 
@@ -75,19 +94,18 @@
 - (void)configRightBarButtomItem
 {
     UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
-    [button setFrame:CGRectMake(0, 0, 50, 30)];
+    [button setFrame:CGRectMake(0, 0, 80, 30)];
     [button setBackgroundColor:[UIColor clearColor]];
-    [button.titleLabel setFont:[UIFont systemFontOfSize:20]];
-    [button setTitle:@"next" forState:UIControlStateNormal];
-    [button setTitleColor:[UIColor purpleColor] forState:UIControlStateNormal];
+    [button.titleLabel setFont:[UIFont systemFontOfSize:16]];
+    [button setTitle:@"找灵感>>" forState:UIControlStateNormal];
+    [button setTitleColor:[UIColor blueColor] forState:UIControlStateNormal];
     [button addTarget:self action:@selector(rightBarButtonItemClick:) forControlEvents:UIControlEventTouchUpInside];
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:button];
 }
 
 - (void)rightBarButtonItemClick:(UIButton *)button
 {
-    WQKLayerVC *layerVC = [[WQKLayerVC alloc] init];
-    [self.navigationController pushViewController:layerVC animated:YES];
+    [self currentViewAnimation];
 }
 
 #pragma marrk - UITableViewDelegate
@@ -127,6 +145,59 @@ static NSString * const cellIdentifier = @"cellidentifier";
     }
     cell.textLabel.text = _animationDataArray.allKeys[indexPath.row];
     return cell;
+}
+
+- (void)currentViewAnimation
+{
+    WQKAppDelegate *delegate = (WQKAppDelegate *)[UIApplication sharedApplication].delegate;
+    UIImage *fogrontImage;
+    UIImage *backGroundImage;
+    fogrontImage = [UIImage imageNamed:@"flip_Forground_Image"];//[self captureImageFromLayer:delegate.fogrountNavc.navigationController.view.layer];
+    backGroundImage = [UIImage imageNamed:@"flip_BackGround_Image"];//[self captureImageFromLayer:delegate.backgountNavc.navigationController.view.layer];
+    __weak typeof(self)weakSelf = self;
+    self.navigationController.view.alpha = 0.;
+    if (!_animationImageView)
+    {
+        self.animationImageView = [[UIImageView alloc] initWithFrame:[UIScreen mainScreen].bounds];
+    }
+    
+    [_animationImageView.layer removeAllAnimations];
+    [_animationImageView setImage:fogrontImage];
+    [[UIApplication sharedApplication].keyWindow addSubview:_animationImageView];
+    _animationImageView.layer.transform = CATransform3DIdentity;
+    CAAnimation *animation = [_animationImageView flipViewWithYWithChangeContentBlock:^{
+        [_animationImageView setImage:backGroundImage];
+//        self.animationImageView.layer.transform = CATransform3DMakeRotation(M_PI_2, 1, 1, 0);
+    }];
+    [_animationImageView.layer addAnimation:animation forKey:@"Alex.FlipAnimationVCY"];
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.9 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        
+        [_animationImageView removeFromSuperview];
+        [delegate switchRootVCWith:NO];
+        weakSelf.navigationController.view.alpha = 1.;
+//        self.animationImageView.layer.transform = CATransform3DMakeScale(0.9, 0.9, -30.);
+    });
+//    self.animationImageView.layer.transform = CATransform3DMakeRotation(M_PI_4, 0, 1, 0);
+//    self.animationImageView.layer.transform = CATransform3DMakeRotation(M_PI_4, 0, 0, 1);
+    [self configScaleVC];
+}
+
+- (UIImage *)captureImageFromLayer:(CALayer *)layer
+{
+    UIGraphicsBeginImageContextWithOptions([UIScreen mainScreen].bounds.size, NO, [UIScreen mainScreen].scale);
+    CGContextRef context = UIGraphicsGetCurrentContext();
+    [layer renderInContext:context];
+    UIImage *image = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    UIImageWriteToSavedPhotosAlbum(image, nil, nil, nil);
+    return image;
+}
+
+
+- (void)configScaleVC
+{
+    [_animationView.layer addAnimation:[_animationView basicAnimationViewWith:0.9 duration:0.5] forKey:@"Alex.BasicScaleSmall"];
+    [_animationView.layer addAnimation:[_animationView basicAnimationViewWith:1.1 duration:0.5] forKey:@"Alex.BasicScaleMoreLage"];
 }
 
 - (void)didReceiveMemoryWarning

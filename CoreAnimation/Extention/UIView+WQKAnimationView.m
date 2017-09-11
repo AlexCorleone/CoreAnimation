@@ -32,7 +32,8 @@
     CABasicAnimation *basicAnimation = [CABasicAnimation animationWithKeyPath:@"bounds"];
     basicAnimation.fromValue = [NSValue valueWithCGRect:self.bounds];
     basicAnimation.toValue = [NSValue valueWithCGRect:CGRectMake(0, 0, self.bounds.size.width * scale, self.bounds.size.width * scale)];
-    basicAnimation.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseInEaseOut];
+//    basicAnimation.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseInEaseOut];
+    basicAnimation.timingFunction = [[CAMediaTimingFunction alloc] initWithControlPoints:0.3 :8 :0.7 :10];
     basicAnimation.duration = duration;
     return basicAnimation;
 }
@@ -54,15 +55,39 @@
     return [self flipAnimationViewWith:0];
 }
 
+- (CAAnimation *)flipViewWithXWithChangeContentBlock:(void (^)(void))changeBlock
+{
+    CATransform3D fromValue = CATransform3DMakeRotation(0, 1, 0, 0);
+    CATransform3D toValue = CATransform3DMakeRotation(M_PI, 1, 0, 0);
+
+    CASpringAnimation *springAnimation = (CASpringAnimation *)[self flipAnimationViewFrom:fromValue toValue:toValue];
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(springAnimation.duration / 2. * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        changeBlock();
+    });
+    return springAnimation;
+}
+
 - (CAAnimation *)flipAnimationViewWithY
 {
     return [self flipAnimationViewWith:1];
+}
+
+- (CAAnimation *)flipViewWithYWithChangeContentBlock:(void (^)(void))changeBlock
+{
+    CATransform3D fromValue = CATransform3DMakeRotation(0, 0, 1, 0);
+    CATransform3D toValue = CATransform3DMakeRotation(M_PI, 0, 1, 0);
+    CASpringAnimation *springAnimation = (CASpringAnimation *)[self flipAnimationViewFrom:fromValue toValue:toValue];
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(springAnimation.duration / 2. * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        changeBlock();
+    });
+    return springAnimation;
 }
 
 - (CAAnimation *)flipAnimationViewWithZ
 {
     return [self flipAnimationViewWith:2];
 }
+
 /*
  * 0 : X轴翻转
  * 1 : Y轴翻转
@@ -74,7 +99,7 @@
     switch (flag) {
         case 0:
             fromValue = CATransform3DMakeRotation(0, 1, 0, 0);
-            toValue = CATransform3DMakeRotation(M_PI, 1, 0, 0);
+            toValue = CATransform3DMakeRotation(M_PI_2, 1, 0, 0);
             break;
         case 1:
             fromValue = CATransform3DMakeRotation(0, 0, 1, 0);
@@ -90,6 +115,12 @@
             toValue = CATransform3DMakeRotation(M_PI, 0, 1, 0);
             break;
     }
+    CASpringAnimation *springAnimation = (CASpringAnimation *)[self flipAnimationViewFrom:fromValue toValue:toValue];
+    return springAnimation;
+}
+
+- (CAAnimation *)flipAnimationViewFrom:(CATransform3D)fromValue toValue:(CATransform3D)toValue
+{
     CASpringAnimation *springAnimation = [CASpringAnimation animationWithKeyPath:@"transform"];
     springAnimation.mass = 18.; //该系数越小，动画弹性速度越快，
     springAnimation.damping = 2.2; //该系数越大，动画执行的时间越短
@@ -101,6 +132,7 @@
     springAnimation.fromValue = [NSValue valueWithCATransform3D:fromValue];
     springAnimation.toValue = [NSValue valueWithCATransform3D:toValue];
     springAnimation.duration = 1;
+    
     return springAnimation;
 }
 

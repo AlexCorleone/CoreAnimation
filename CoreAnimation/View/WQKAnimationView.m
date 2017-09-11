@@ -22,7 +22,7 @@
     self = [super initWithFrame:frame];
     if (self)
     {
-        [self setBackgroundColor:[UIColor darkGrayColor]];
+        [self setBackgroundColor:[UIColor purpleColor]];
         [self addSubview:self.springImageView];
     }
     return self;
@@ -34,6 +34,7 @@
     if (!_springImageView)
     {
         self.springImageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"spring_ThumbUp_Image"]];
+        [_springImageView setContentMode:UIViewContentModeScaleToFill];
         [_springImageView setFrame:self.bounds];
     }
     return _springImageView;
@@ -42,6 +43,7 @@
 - (void)setAnimationType:(WQKAnimationViewType)animationType
 {
     NSLog(@"%@", self.layer.animationKeys);
+    [self beginAndResetAnimation];
     switch (animationType) {
         case WQKAnimationViewGroup:
             [self WQKAnimationViewGroup];
@@ -75,22 +77,39 @@
 
 - (void)WQKAnimationViewFlitX
 {
-    [self.layer addAnimation:[self flipAnimationViewWithX] forKey:@"Alex.FlipX"];
+    [self.layer addAnimation:[self flipViewWithXWithChangeContentBlock:^{
+        [self.springImageView setImage:[UIImage imageNamed:@"spring_UnthumbUp_Image"]];
+    }] forKey:@"Alex.FlipX"];
 }
 - (void)WQKAnimationViewFlitY
 {
-    [self.layer addAnimation:[self flipAnimationViewWithY] forKey:@"Alex.FlipY"];
+    [self.layer addAnimation:[self flipViewWithYWithChangeContentBlock:^{
+        [self.springImageView setImage:[UIImage imageNamed:@"spring_UnthumbUp_Image"]];
+        self.springImageView.layer.transform = CATransform3DMakeRotation(M_PI, 0, 1, 0);
+    }] forKey:@"Alex.FlipY"];
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        self.springImageView.layer.transform = CATransform3DMakeRotation(M_PI, 0, 1, 0);
+    });
 }
 
 - (void)WQKAnimationViewFlitZ
 {
-    [self.layer addAnimation:[self flipAnimationViewWithZ] forKey:@"Alex.FlipZ"];
+    [self.layer addAnimation:[self flipAnimationViewWithZ] forKey:@"Alex.FlipViewZ"];
 }
 
 - (void)WQKAnimationViewBasicScale
 {
-    [self.layer addAnimation:[self basicAnimationViewWith:1.5 duration:2] forKey:@"Alex.BasicScale"];
+//    [self.layer addAnimation:[self.springImageView basicAnimationViewWith:1.1 duration:1] forKey:@"Alex.BasicViewScale"];
+    [self.springImageView.layer addAnimation:[self.springImageView basicAnimationViewWith:1.1 duration:1] forKey:@"Alex.BasicImageScale"];
+}
 
+- (void)beginAndResetAnimation
+{
+    [self.layer removeAllAnimations];
+    self.layer.transform = CATransform3DIdentity;
+    [self.springImageView.layer removeAllAnimations];
+    self.springImageView.layer.transform = CATransform3DIdentity;
+    [self.springImageView setImage:[UIImage imageNamed:@"spring_ThumbUp_Image"]];
 }
 
 - (CGPathRef)createKeyFramePath

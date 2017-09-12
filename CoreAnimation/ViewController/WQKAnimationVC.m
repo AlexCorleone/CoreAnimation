@@ -86,7 +86,11 @@
                                     @"Y轴翻转" : @(WQKAnimationViewFlitY),
                                     @"Z轴翻转" : @(WQKAnimationViewFlitZ),
                                     @"basic放大" : @(WQKAnimationViewBasicScale),
-                                    @"组合动画" : @(WQKAnimationViewGroup)};
+                                    @"组合动画" : @(WQKAnimationViewGroup),
+                                    @"弹簧进入动画Left" : @(WQKAnimationViewSpringIntoLeft),
+                                    @"弹簧进入动画Right" : @(WQKAnimationViewSpringIntoRight),
+                                    @"弹簧进入动画Top" : @(WQKAnimationViewSpringIntoTop),
+                                    @"弹簧进入动画Bottom" : @(WQKAnimationViewSpringIntoBottom)};
     }
     return _animationDataArray;
 }
@@ -105,7 +109,10 @@
 
 - (void)rightBarButtonItemClick:(UIButton *)button
 {
-    [self currentViewAnimation];
+    WQKLayerVC *layerVC = [[WQKLayerVC alloc] init];
+    UINavigationController *navc = [[UINavigationController alloc] initWithRootViewController:layerVC];
+    layerVC.modalTransitionStyle = UIModalTransitionStyleFlipHorizontal;
+    [self.navigationController presentViewController:navc animated:YES completion:nil];
 }
 
 #pragma marrk - UITableViewDelegate
@@ -147,41 +154,6 @@ static NSString * const cellIdentifier = @"cellidentifier";
     return cell;
 }
 
-- (void)currentViewAnimation
-{
-    WQKAppDelegate *delegate = (WQKAppDelegate *)[UIApplication sharedApplication].delegate;
-    UIImage *fogrontImage;
-    UIImage *backGroundImage;
-    fogrontImage = [UIImage imageNamed:@"flip_Forground_Image"];//[self captureImageFromLayer:delegate.fogrountNavc.navigationController.view.layer];
-    backGroundImage = [UIImage imageNamed:@"flip_BackGround_Image"];//[self captureImageFromLayer:delegate.backgountNavc.navigationController.view.layer];
-    __weak typeof(self)weakSelf = self;
-    self.navigationController.view.alpha = 0.;
-    if (!_animationImageView)
-    {
-        self.animationImageView = [[UIImageView alloc] initWithFrame:[UIScreen mainScreen].bounds];
-    }
-    
-    [_animationImageView.layer removeAllAnimations];
-    [_animationImageView setImage:fogrontImage];
-    [[UIApplication sharedApplication].keyWindow addSubview:_animationImageView];
-    _animationImageView.layer.transform = CATransform3DIdentity;
-    CAAnimation *animation = [_animationImageView flipViewWithYWithChangeContentBlock:^{
-        [_animationImageView setImage:backGroundImage];
-//        self.animationImageView.layer.transform = CATransform3DMakeRotation(M_PI_2, 1, 1, 0);
-    }];
-    [_animationImageView.layer addAnimation:animation forKey:@"Alex.FlipAnimationVCY"];
-    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.9 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-        
-        [_animationImageView removeFromSuperview];
-        [delegate switchRootVCWith:NO];
-        weakSelf.navigationController.view.alpha = 1.;
-//        self.animationImageView.layer.transform = CATransform3DMakeScale(0.9, 0.9, -30.);
-    });
-//    self.animationImageView.layer.transform = CATransform3DMakeRotation(M_PI_4, 0, 1, 0);
-//    self.animationImageView.layer.transform = CATransform3DMakeRotation(M_PI_4, 0, 0, 1);
-    [self configScaleVC];
-}
-
 - (UIImage *)captureImageFromLayer:(CALayer *)layer
 {
     UIGraphicsBeginImageContextWithOptions([UIScreen mainScreen].bounds.size, NO, [UIScreen mainScreen].scale);
@@ -193,11 +165,10 @@ static NSString * const cellIdentifier = @"cellidentifier";
     return image;
 }
 
-
 - (void)configScaleVC
 {
     [_animationView.layer addAnimation:[_animationView basicAnimationViewWith:0.9 duration:0.5] forKey:@"Alex.BasicScaleSmall"];
-    [_animationView.layer addAnimation:[_animationView basicAnimationViewWith:1.1 duration:0.5] forKey:@"Alex.BasicScaleMoreLage"];
+    [_animationView.layer addAnimation:[_animationView basicAnimationViewWith:1.1 duration:0.5] forKey:@"Alex.BasicScaleLage"];
 }
 
 - (void)didReceiveMemoryWarning

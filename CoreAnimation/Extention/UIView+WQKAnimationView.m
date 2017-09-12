@@ -38,6 +38,122 @@
     return basicAnimation;
 }
 
+//弹簧进入
+- (CAAnimation *)springIntoAnimationViewWith:(WQKAnimationDerictionType)directionType
+                                  startPoint:(CGPoint)startPoint
+                                    endPoint:(CGPoint)endPoint
+                                    duration:(NSTimeInterval)duration
+{
+    NSArray *valueArray = nil;
+    switch (directionType) {
+        case WQKAnimationDerictionTop:
+        {
+            CGFloat X = startPoint.x;
+            CGFloat startY = startPoint.y;
+            CGFloat endY = endPoint.y;
+            CGFloat space = (endY - startY) / 10.;
+            CGFloat backPointY = endY - space;
+            CGFloat advancePointY = endY + space;
+            valueArray = @[[NSValue valueWithCGPoint:CGPointMake(X, startY)],
+                           [NSValue valueWithCGPoint:CGPointMake(X, endY)],
+                           [NSValue valueWithCGPoint:CGPointMake(X, advancePointY)],
+                           [NSValue valueWithCGPoint:CGPointMake(X, endY)],
+                           [NSValue valueWithCGPoint:CGPointMake(X, backPointY)],
+                           [NSValue valueWithCGPoint:CGPointMake(X, endY)],
+                           [NSValue valueWithCGPoint:CGPointMake(X, advancePointY)],
+                           [NSValue valueWithCGPoint:CGPointMake(X, endY)],
+                           [NSValue valueWithCGPoint:CGPointMake(X, backPointY)],
+                           [NSValue valueWithCGPoint:CGPointMake(X, endY)]];
+        }
+            break;
+        case WQKAnimationDerictionBottom:
+        {
+            CGFloat X = startPoint.x;
+            CGFloat startY = startPoint.y;
+            CGFloat endY = endPoint.y;
+            CGFloat space = (startY - endY) / 10.;
+            CGFloat backPointY = endY + space;
+            CGFloat advancePointY = endY - space;
+            valueArray = @[[NSValue valueWithCGPoint:CGPointMake(X, startY)],
+                           [NSValue valueWithCGPoint:CGPointMake(X, endY)],
+                           [NSValue valueWithCGPoint:CGPointMake(X, advancePointY)],
+                           [NSValue valueWithCGPoint:CGPointMake(X, endY)],
+                           [NSValue valueWithCGPoint:CGPointMake(X, backPointY)],
+                           [NSValue valueWithCGPoint:CGPointMake(X, endY)],
+                           [NSValue valueWithCGPoint:CGPointMake(X, advancePointY)],
+                           [NSValue valueWithCGPoint:CGPointMake(X, endY)],
+                           [NSValue valueWithCGPoint:CGPointMake(X, backPointY)],
+                           [NSValue valueWithCGPoint:CGPointMake(X, endY)]];
+        }
+            break;
+        case WQKAnimationDerictionLeft:
+        {
+            CGFloat Y = startPoint.y;
+            CGFloat startX = startPoint.x;
+            CGFloat endX = endPoint.x;
+            CGFloat space = (endX - startX) / 10.;
+            CGFloat backPointx = endX - space;
+            CGFloat advancePointx = endX + space;
+
+            valueArray = @[[NSValue valueWithCGPoint:CGPointMake(startX, Y)],
+                           [NSValue valueWithCGPoint:CGPointMake(endX, Y)],
+                           [NSValue valueWithCGPoint:CGPointMake(advancePointx, Y)],
+                           [NSValue valueWithCGPoint:CGPointMake(endX, Y)],
+                           [NSValue valueWithCGPoint:CGPointMake(backPointx, Y)],
+                           [NSValue valueWithCGPoint:CGPointMake(endX, Y)],
+                           [NSValue valueWithCGPoint:CGPointMake(advancePointx, Y)],
+                           [NSValue valueWithCGPoint:CGPointMake(endX, Y)],
+                           [NSValue valueWithCGPoint:CGPointMake(backPointx, Y)],
+                           [NSValue valueWithCGPoint:CGPointMake(endX, Y)]];
+        }
+            break;
+        case WQKAnimationDerictionRight:
+        {
+            CGFloat Y = startPoint.y;
+            CGFloat startX = startPoint.x;
+            CGFloat endX = endPoint.x;
+            CGFloat space = (startX - endX) / 10.;
+            CGFloat backPointx = endX + space;
+            CGFloat advancePointx = endX - space;
+            
+            valueArray = @[[NSValue valueWithCGPoint:CGPointMake(startX, Y)],
+                           [NSValue valueWithCGPoint:CGPointMake(endX, Y)],
+                           [NSValue valueWithCGPoint:CGPointMake(advancePointx, Y)],
+                           [NSValue valueWithCGPoint:CGPointMake(endX, Y)],
+                           [NSValue valueWithCGPoint:CGPointMake(backPointx, Y)],
+                           [NSValue valueWithCGPoint:CGPointMake(endX, Y)],
+                           [NSValue valueWithCGPoint:CGPointMake(advancePointx, Y)],
+                           [NSValue valueWithCGPoint:CGPointMake(endX, Y)],
+                           [NSValue valueWithCGPoint:CGPointMake(backPointx, Y)],
+                           [NSValue valueWithCGPoint:CGPointMake(endX, Y)]];
+        }
+            break;
+
+            
+        default:
+            break;
+    }
+    CAKeyframeAnimation *keyFrameAnimation = [CAKeyframeAnimation animationWithKeyPath:@"position"];
+    keyFrameAnimation.removedOnCompletion = NO;
+    keyFrameAnimation.fillMode = kCAFillModeForwards;
+    keyFrameAnimation.values = valueArray;
+    keyFrameAnimation.duration = duration;
+    keyFrameAnimation.keyTimes = @[@(0.0), @(0.65), @(0.7), @(0.75), @(0.80),
+                                   @(0.85), @(0.9), @(0.95), @(0.97), @(0.99)];
+    keyFrameAnimation.timingFunctions = @[[CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionLinear],
+                                        [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseInEaseOut],
+                                        [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionLinear],
+                                        [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionLinear],
+                                        [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionLinear],
+                                        [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionLinear],
+                                        [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionLinear],
+                                        [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionLinear],
+                                        [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionLinear],
+                                        [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionLinear],
+                                        ];
+    return keyFrameAnimation;
+}
+
 - (CAAnimation *)keyFrameAnimationWith:(CGPathRef)path duration:(CGFloat)duration
 {
     CAKeyframeAnimation *keyFrameAnimation = [CAKeyframeAnimation animationWithKeyPath:@"position"];

@@ -24,6 +24,7 @@
     [self.navigationItem setTitle:@"Layer"];
     [self.view setBackgroundColor:[UIColor whiteColor]];
     [self.view addSubview:self.layerView];
+    [self configRightBarButtomItem];
 }
 
 #pragma mark - setter && getter
@@ -35,6 +36,23 @@
         
     }
     return _layerView;
+}
+
+- (void)configRightBarButtomItem
+{
+    UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
+    [button setFrame:CGRectMake(0, 0, 95, 30)];
+    [button setBackgroundColor:[UIColor clearColor]];
+    [button.titleLabel setFont:[UIFont systemFontOfSize:16]];
+    [button setTitle:@"<<即将启程" forState:UIControlStateNormal];
+    [button setTitleColor:[UIColor blueColor] forState:UIControlStateNormal];
+    [button addTarget:self action:@selector(rightBarButtonItemClick:) forControlEvents:UIControlEventTouchUpInside];
+    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:button];
+}
+
+- (void)rightBarButtonItemClick:(UIButton *)button
+{
+    [self dismissViewControllerAnimated:YES completion:nil];
 }
 
 - (void)dealloc

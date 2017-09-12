@@ -13,7 +13,12 @@ typedef enum : NSUInteger {
     WQKAnimationViewFlitX,
     WQKAnimationViewFlitY,
     WQKAnimationViewFlitZ,
-    WQKAnimationViewBasicScale
+    WQKAnimationViewBasicScale,
+    WQKAnimationViewSpringIntoTop,
+    WQKAnimationViewSpringIntoLeft,
+    WQKAnimationViewSpringIntoBottom,
+    WQKAnimationViewSpringIntoRight
+
 } WQKAnimationViewType;
 @interface WQKAnimationView : UIView
 

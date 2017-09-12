@@ -8,11 +8,23 @@
 
 #import <UIKit/UIKit.h>
 
+typedef NS_ENUM(NSUInteger, WQKAnimationDerictionType) {
+    WQKAnimationDerictionLeft,
+    WQKAnimationDerictionTop,
+    WQKAnimationDerictionRight,
+    WQKAnimationDerictionBottom
+};
 @interface UIView (WQKAnimationView)<CAAnimationDelegate>
 
 //放大缩小
 - (CAAnimation *)springAnimationViewWith:(CGFloat)scale duration:(CGFloat)duration;
 - (CAAnimation *)basicAnimationViewWith:(CGFloat)scale duration:(CGFloat)duration;
+
+//弹簧进入 keyFrame实现
+- (CAAnimation *)springIntoAnimationViewWith:(WQKAnimationDerictionType)directionType
+                                  startPoint:(CGPoint)startPoint
+                                    endPoint:(CGPoint)endPoint
+                                    duration:(NSTimeInterval)duration;
 
 //曲线移动
 - (CAAnimation *)keyFrameAnimationWith:(CGPathRef)path

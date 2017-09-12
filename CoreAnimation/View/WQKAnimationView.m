@@ -60,7 +60,19 @@
         case WQKAnimationViewBasicScale:
             [self WQKAnimationViewBasicScale];
             break;
- 
+        case WQKAnimationViewSpringIntoLeft:
+            [self WQKAnimationViewSpringIntoLeft];
+            break;
+        case WQKAnimationViewSpringIntoTop:
+            [self WQKAnimationViewSpringIntoTop];
+            break;
+        case WQKAnimationViewSpringIntoRight:
+            [self WQKAnimationViewSpringIntoRight];
+            break;
+        case WQKAnimationViewSpringIntoBottom:
+            [self WQKAnimationViewSpringIntoBottom];
+            break;
+
         default:
             break;
     }
@@ -101,6 +113,26 @@
 {
 //    [self.layer addAnimation:[self.springImageView basicAnimationViewWith:1.1 duration:1] forKey:@"Alex.BasicViewScale"];
     [self.springImageView.layer addAnimation:[self.springImageView basicAnimationViewWith:1.1 duration:1] forKey:@"Alex.BasicImageScale"];
+}
+
+- (void)WQKAnimationViewSpringIntoLeft
+{
+    [self.layer addAnimation:[self springIntoAnimationViewWith:WQKAnimationDerictionLeft startPoint:CGPointMake(30, 100) endPoint:CGPointMake(305, 100) duration:1.] forKey:@"Alex.KeyFrameSpringIntoLeft"];
+}
+
+- (void)WQKAnimationViewSpringIntoTop
+{
+    [self.layer addAnimation:[self springIntoAnimationViewWith:WQKAnimationDerictionTop startPoint:CGPointMake(35, 35) endPoint:CGPointMake(250, 250) duration:1.] forKey:@"Alex.KeyFrameSpringIntoTop"];
+}
+
+- (void)WQKAnimationViewSpringIntoRight
+{
+    [self.layer addAnimation:[self springIntoAnimationViewWith:WQKAnimationDerictionRight startPoint:CGPointMake(320, 100) endPoint:CGPointMake(30, 100) duration:1.] forKey:@"Alex.KeyFrameSpringIntoRight"];
+}
+
+- (void)WQKAnimationViewSpringIntoBottom
+{
+    [self.layer addAnimation:[self springIntoAnimationViewWith:WQKAnimationDerictionBottom startPoint:CGPointMake(350, 350) endPoint:CGPointMake(105, 105) duration:1.] forKey:@"Alex.KeyFrameSpringIntoBottom"];
 }
 
 - (void)beginAndResetAnimation

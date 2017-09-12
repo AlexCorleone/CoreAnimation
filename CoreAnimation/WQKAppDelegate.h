@@ -13,10 +13,6 @@
 
 @property (strong, nonatomic) UIWindow *window;
 
-@property (nonatomic, strong) UINavigationController *fogrountNavc;
-
-@property (nonatomic, strong) UINavigationController *backgountNavc;
-
 @property (readonly, strong) NSPersistentContainer *persistentContainer;
 
 - (void)saveContext;

@@ -7,7 +7,6 @@
 //
 
 #import "WQKAnimationView.h"
-#import "YSCWaterWaveView.h"
 #import "UIView+WQKAnimationView.h"
 
 @interface WQKAnimationView ()

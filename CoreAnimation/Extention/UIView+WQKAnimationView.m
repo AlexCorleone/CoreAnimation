@@ -138,19 +138,20 @@
     keyFrameAnimation.fillMode = kCAFillModeForwards;
     keyFrameAnimation.values = valueArray;
     keyFrameAnimation.duration = duration;
-    keyFrameAnimation.keyTimes = @[@(0.0), @(0.65), @(0.7), @(0.75), @(0.80),
-                                   @(0.85), @(0.9), @(0.95), @(0.97), @(0.99)];
-    keyFrameAnimation.timingFunctions = @[[CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionLinear],
-                                        [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseInEaseOut],
-                                        [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionLinear],
-                                        [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionLinear],
-                                        [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionLinear],
-                                        [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionLinear],
-                                        [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionLinear],
-                                        [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionLinear],
-                                        [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionLinear],
-                                        [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionLinear],
-                                        ];
+    keyFrameAnimation.calculationMode = kCAAnimationCubicPaced;
+//    keyFrameAnimation.keyTimes = @[@(0.0), @(0.65), @(0.7), @(0.75), @(0.80),
+//                                   @(0.85), @(0.9), @(0.95), @(0.97), @(0.99)];
+//    keyFrameAnimation.timingFunctions = @[[CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionLinear],
+//                                        [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseInEaseOut],
+//                                        [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionLinear],
+//                                        [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionLinear],
+//                                        [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionLinear],
+//                                        [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionLinear],
+//                                        [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionLinear],
+//                                        [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionLinear],
+//                                        [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionLinear],
+//                                        [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionLinear],
+//                                        ];
     return keyFrameAnimation;
 }
 
@@ -275,15 +276,15 @@
     return groupAni;
 }
 
-//很鸡肋基本没有什么用处
-//- (CAAnimation *)transitionAnimation
-//{
-//    CATransition *transition = [CATransition animation];
-//    transition.type = kCATransitionReveal;
-//    transition.subtype = kCATransitionFromTop;
-//    [self.layer addAnimation:transition forKey:@"transitionAnimation"];
-//    return transition;
-//}
+- (CAAnimation *)transitionAnimation
+{
+    CATransition *transition = [CATransition animation];
+    transition.type = kCATransitionPush;
+    transition.subtype = kCATransitionFromLeft;
+    transition.duration = 2;
+    [self.layer addAnimation:transition forKey:@"transitionAnimation"];
+    return transition;
+}
 
 #pragma mark - CAAnimationDelegate
 - (void)animationDidStart:(CAAnimation *)anim
@@ -293,5 +294,7 @@
 - (void)animationDidStop:(CAAnimation *)anim finished:(BOOL)flag
 {
 }
-
+/*
+ *CoreAnimation
+ */
 @end

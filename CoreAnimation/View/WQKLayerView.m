@@ -55,12 +55,12 @@
 
 - (instancetype)initWithFrame:(CGRect)frame
 {
-    return [self initWithFrame:frame layerType:WQKLayerViewTransformLayer];
+    return [self initWithFrame:frame layerType:WQKLayerViewShapeLayer];
 }
 
 - (void)configGradientLayer
 {
-    //注意如果colors之给定一个颜色，没有效果显示
+    //注意如果colors给定一个颜色，没有效果显示
     CAGradientLayer *gradientLayer = [CAGradientLayer layer];
     [gradientLayer setFrame:CGRectMake(0, 10, self.bounds.size.width, 100)];
     [gradientLayer setColors:@[(id)[UIColor redColor].CGColor,
@@ -162,12 +162,11 @@
     [transFromLayer addSublayer:firstLayer];
     [transFromLayer addSublayer:secondLayer];
     [self.layer addSublayer:transFromLayer];
-    
 }
 
 - (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event
 {
-    [self.layer addAnimation:[self flipAnimationViewWithY] forKey:@"jbcsdsd"];
+
 }
 
 @end

@@ -40,4 +40,6 @@ typedef NS_ENUM(NSUInteger, WQKAnimationDerictionType) {
 
 - (CAAnimationGroup *)groupAnimationWith:(NSArray <CAAnimation *>*)animations;
 
+- (CAAnimation *)transitionAnimation;
+
 @end

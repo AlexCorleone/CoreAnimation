@@ -16,7 +16,6 @@
 		296BFBB21F5E795A009010B2 /* CoreAnimationUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 296BFBB11F5E795A009010B2 /* CoreAnimationUITests.m */; };
 		296BFBC21F5E7B43009010B2 /* WQKAnimationVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 296BFBC11F5E7B43009010B2 /* WQKAnimationVC.m */; };
 		298D0F841F5E7DCD001ACDCB /* WQKAnimationView.m in Sources */ = {isa = PBXBuildFile; fileRef = 298D0F831F5E7DCD001ACDCB /* WQKAnimationView.m */; };
-		298D0F881F5E8FCF001ACDCB /* YSCWaterWaveView.m in Sources */ = {isa = PBXBuildFile; fileRef = 298D0F871F5E8FCF001ACDCB /* YSCWaterWaveView.m */; };
 		298D0F8C1F5F8894001ACDCB /* UIView+WQKAnimationView.m in Sources */ = {isa = PBXBuildFile; fileRef = 298D0F8B1F5F8894001ACDCB /* UIView+WQKAnimationView.m */; };
 		29B02F471F5FD78400416D6F /* WQKLayerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 29B02F461F5FD78400416D6F /* WQKLayerView.m */; };
 		29BA1E4B1F60D7E800097635 /* WQKLayerVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 29BA1E4A1F60D7E800097635 /* WQKLayerVC.m */; };
@@ -65,8 +64,6 @@
 		296BFBC11F5E7B43009010B2 /* WQKAnimationVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WQKAnimationVC.m; sourceTree = "<group>"; };
 		298D0F821F5E7DCD001ACDCB /* WQKAnimationView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WQKAnimationView.h; sourceTree = "<group>"; };
 		298D0F831F5E7DCD001ACDCB /* WQKAnimationView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WQKAnimationView.m; sourceTree = "<group>"; };
-		298D0F861F5E8FCF001ACDCB /* YSCWaterWaveView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YSCWaterWaveView.h; sourceTree = "<group>"; };
-		298D0F871F5E8FCF001ACDCB /* YSCWaterWaveView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YSCWaterWaveView.m; sourceTree = "<group>"; };
 		298D0F8A1F5F8894001ACDCB /* UIView+WQKAnimationView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+WQKAnimationView.h"; sourceTree = "<group>"; };
 		298D0F8B1F5F8894001ACDCB /* UIView+WQKAnimationView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+WQKAnimationView.m"; sourceTree = "<group>"; };
 		29B02F451F5FD78400416D6F /* WQKLayerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WQKLayerView.h; sourceTree = "<group>"; };
@@ -147,7 +144,6 @@
 			isa = PBXGroup;
 			children = (
 				298D0F891F5F87E3001ACDCB /* Extention */,
-				298D0F851F5E8FCF001ACDCB /* waterWave */,
 				298D0F811F5E7D89001ACDCB /* Model */,
 				298D0F801F5E7D79001ACDCB /* View */,
 				298D0F7F1F5E7D64001ACDCB /* ViewModel */,
@@ -225,15 +221,6 @@
 			children = (
 			);
 			path = Model;
-			sourceTree = "<group>";
-		};
-		298D0F851F5E8FCF001ACDCB /* waterWave */ = {
-			isa = PBXGroup;
-			children = (
-				298D0F861F5E8FCF001ACDCB /* YSCWaterWaveView.h */,
-				298D0F871F5E8FCF001ACDCB /* YSCWaterWaveView.m */,
-			);
-			path = waterWave;
 			sourceTree = "<group>";
 		};
 		298D0F891F5F87E3001ACDCB /* Extention */ = {
@@ -559,7 +546,6 @@
 				298D0F841F5E7DCD001ACDCB /* WQKAnimationView.m in Sources */,
 				296BFB971F5E7959009010B2 /* CoreAnimation.xcdatamodeld in Sources */,
 				298D0F8C1F5F8894001ACDCB /* UIView+WQKAnimationView.m in Sources */,
-				298D0F881F5E8FCF001ACDCB /* YSCWaterWaveView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -63,7 +63,8 @@
                            [NSValue valueWithCGPoint:CGPointMake(X, advancePointY)],
                            [NSValue valueWithCGPoint:CGPointMake(X, endY)],
                            [NSValue valueWithCGPoint:CGPointMake(X, backPointY)],
-                           [NSValue valueWithCGPoint:CGPointMake(X, endY)]];
+                           [NSValue valueWithCGPoint:CGPointMake(X, endY)]
+                           ];
         }
             break;
         case WQKAnimationDerictionBottom:
@@ -216,7 +217,7 @@
     switch (flag) {
         case 0:
             fromValue = CATransform3DMakeRotation(0, 1, 0, 0);
-            toValue = CATransform3DMakeRotation(M_PI_2, 1, 0, 0);
+            toValue = CATransform3DMakeRotation(M_PI, 1, 0, 0);
             break;
         case 1:
             fromValue = CATransform3DMakeRotation(0, 0, 1, 0);

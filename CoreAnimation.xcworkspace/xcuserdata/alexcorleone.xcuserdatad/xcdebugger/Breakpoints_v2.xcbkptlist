@@ -10,11 +10,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "CoreAnimation/Extention/UIView+WQKAnimationView.m"
-            timestampString = "527406954.709086"
+            timestampString = "527512240.984545"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "173"
-            endingLineNumber = "173"
+            startingLineNumber = "174"
+            endingLineNumber = "174"
             landmarkName = "-flipAnimationViewWithX"
             landmarkType = "7">
          </BreakpointContent>

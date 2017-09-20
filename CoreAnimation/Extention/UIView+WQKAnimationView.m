@@ -84,7 +84,8 @@
                            [NSValue valueWithCGPoint:CGPointMake(X, advancePointY)],
                            [NSValue valueWithCGPoint:CGPointMake(X, endY)],
                            [NSValue valueWithCGPoint:CGPointMake(X, backPointY)],
-                           [NSValue valueWithCGPoint:CGPointMake(X, endY)]];
+                           [NSValue valueWithCGPoint:CGPointMake(X, endY)]
+                           ];
         }
             break;
         case WQKAnimationDerictionLeft:
@@ -139,7 +140,7 @@
     keyFrameAnimation.fillMode = kCAFillModeForwards;
     keyFrameAnimation.values = valueArray;
     keyFrameAnimation.duration = duration;
-    keyFrameAnimation.calculationMode = kCAAnimationCubicPaced;
+    keyFrameAnimation.calculationMode = kCAAnimationPaced;
 //    keyFrameAnimation.keyTimes = @[@(0.0), @(0.65), @(0.7), @(0.75), @(0.80),
 //                                   @(0.85), @(0.9), @(0.95), @(0.97), @(0.99)];
 //    keyFrameAnimation.timingFunctions = @[[CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionLinear],

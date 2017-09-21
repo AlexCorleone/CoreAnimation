@@ -6,6 +6,7 @@ target 'CoreAnimation' do
   # use_frameworks!
 
   # Pods for CoreAnimation
+  pod 'Masonry', '~> 1.0.2'
 
   target 'CoreAnimationTests' do
     inherit! :search_paths

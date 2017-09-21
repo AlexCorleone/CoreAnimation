@@ -71,7 +71,6 @@
         case WQKAnimationViewSpringIntoBottom:
             [self WQKAnimationViewSpringIntoBottom];
             break;
-
         default:
             break;
     }
@@ -101,6 +100,17 @@
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
         self.springImageView.layer.transform = CATransform3DMakeRotation(M_PI, 0, 1, 0);
     });
+    //block中的transform并未起作用
+//   [_springImageView.layer addAnimation:[_springImageView flipViewWithYWithChangeContentBlock:^{
+//        [_springImageView setImage:[UIImage imageNamed:@"spring_UnthumbUp_Image"]];
+//       dispatch_async(dispatch_get_main_queue(), ^{
+//           _springImageView.layer.transform = CATransform3DMakeRotation(M_PI, 0, 1, 0);
+//       });
+//    }] forKey:@"Alex.FlipY"];
+//    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+//        _springImageView.layer.transform = CATransform3DMakeRotation(M_PI, 0, 1, 0);
+//    });
+
 }
 
 - (void)WQKAnimationViewFlitZ

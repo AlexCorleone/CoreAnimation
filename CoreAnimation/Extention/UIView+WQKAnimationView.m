@@ -60,10 +60,10 @@
                            [NSValue valueWithCGPoint:CGPointMake(X, endY)],
                            [NSValue valueWithCGPoint:CGPointMake(X, backPointY)],
                            [NSValue valueWithCGPoint:CGPointMake(X, endY)],
-                           [NSValue valueWithCGPoint:CGPointMake(X, advancePointY)],
-                           [NSValue valueWithCGPoint:CGPointMake(X, endY)],
-                           [NSValue valueWithCGPoint:CGPointMake(X, backPointY)],
-                           [NSValue valueWithCGPoint:CGPointMake(X, endY)]
+//                           [NSValue valueWithCGPoint:CGPointMake(X, advancePointY)],
+//                           [NSValue valueWithCGPoint:CGPointMake(X, endY)],
+//                           [NSValue valueWithCGPoint:CGPointMake(X, backPointY)],
+//                           [NSValue valueWithCGPoint:CGPointMake(X, endY)]
                            ];
         }
             break;

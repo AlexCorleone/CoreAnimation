@@ -18,7 +18,7 @@ typedef enum : NSUInteger {
     WQKAnimationViewSpringIntoLeft,
     WQKAnimationViewSpringIntoBottom,
     WQKAnimationViewSpringIntoRight
-
+    
 } WQKAnimationViewType;
 @interface WQKAnimationView : UIView
 

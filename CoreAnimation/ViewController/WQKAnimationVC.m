@@ -90,7 +90,8 @@
                                     @"弹簧进入动画Left" : @(WQKAnimationViewSpringIntoLeft),
                                     @"弹簧进入动画Right" : @(WQKAnimationViewSpringIntoRight),
                                     @"弹簧进入动画Top" : @(WQKAnimationViewSpringIntoTop),
-                                    @"弹簧进入动画Bottom" : @(WQKAnimationViewSpringIntoBottom)};
+                                    @"弹簧进入动画Bottom" : @(WQKAnimationViewSpringIntoBottom)
+                                    };
     }
     return _animationDataArray;
 }

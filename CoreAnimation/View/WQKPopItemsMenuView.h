@@ -10,10 +10,22 @@
 
 @interface WQKPopItemsMenuView : UIView
 
+/*
+ *YES,展示动画 NO，隐藏动画
+ */
+@property (nonatomic, assign) BOOL isShowBtnList;
+/*
+ *只有title
+ */
 @property (nonatomic, strong) NSArray <NSString *>*titleArray;
-
+/*
+ *标题图片组合初始化
+ * @{@"title" : @"imageName"}
+ */
+@property (nonatomic, strong) NSArray <NSDictionary *>*titleImageArray;
+/*
+ *item点击回调
+ */
 @property (nonatomic, copy) void(^itemClickBlock)(id targetItem, NSUInteger index);
-
-- (void)isShowBtnAray:(BOOL)flag;
 
 @end

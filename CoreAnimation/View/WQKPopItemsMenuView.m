@@ -22,17 +22,22 @@
     self = [super initWithFrame:frame];
     if (self)
     {
-        [self setBackgroundColor:[UIColor clearColor]];
+        [self setBackgroundColor:[UIColor whiteColor]];
     }
     return self;
 }
 
 #pragma mark - Private Method
-
 - (void)setTitleArray:(NSArray<NSString *> *)titleArray
 {
     _titleArray = titleArray;
     [self createBtnArray];
+}
+
+- (void)setIsShowBtnList:(BOOL)isShowBtnList
+{
+    _isShowBtnList = isShowBtnList;
+    [self isShowBtnAray:_isShowBtnList];
 }
 
 - (NSArray *)createBtnArray
@@ -81,7 +86,6 @@
 #pragma mark - Public Method
 - (void)isShowBtnAray:(BOOL)flag
 {
-    
     for (UIButton *btn in self.btnArray)
     {
         NSString *animationKey = [NSString stringWithFormat:@"Alex.Group %ld", btn.tag];
@@ -89,18 +93,20 @@
         if (!flag)
         {
             CAKeyframeAnimation *animation = (CAKeyframeAnimation *)[self springIntoAnimationViewWith:WQKAnimationDerictionTop startPoint:CGPointMake(btn.center.x, btn.center.y + 100) endPoint:btn.center duration:0.6];
-            animation.timingFunction = [CAMediaTimingFunction functionWithControlPoints:0.53 :0.35 :0.83 :0.47];
+            animation.timingFunction = [CAMediaTimingFunction functionWithControlPoints:0.82 :1.13 :0.7 :1.15];
+
             dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(((btn.tag - tagBaseFlage) * 0.1) * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
                 [btn setHidden:flag];
                 [btn.layer addAnimation:animation forKey:animationKey];
             });
         }else
         {
-            CAKeyframeAnimation *animation = (CAKeyframeAnimation *)[self springIntoAnimationViewWith:WQKAnimationDerictionBottom startPoint:btn.center endPoint:CGPointMake(btn.center.x, btn.center.y + 100) duration:0.6];
+            CAKeyframeAnimation *animation = (CAKeyframeAnimation *)[self springIntoAnimationViewWith:WQKAnimationDerictionBottom startPoint:btn.center endPoint:CGPointMake(btn.center.x, btn.center.y + 100) duration:0.3];
             animation.calculationMode = kCAAnimationPaced;
+            
             dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(((_btnArray.count + tagBaseFlage - btn.tag) * 0.1) * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
                 [btn.layer addAnimation:animation forKey:animationKey];
-                dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.3 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+                dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
                     [btn setHidden:flag];
                 });
             });
@@ -131,8 +137,8 @@
                    //                           [NSValue valueWithCGPoint:CGPointMake(X, endY)]
                    ];
     CAKeyframeAnimation *keyFrameAnimation = [CAKeyframeAnimation animationWithKeyPath:@"position"];
-    keyFrameAnimation.removedOnCompletion = NO;
-    keyFrameAnimation.fillMode = kCAFillModeForwards;
+//    keyFrameAnimation.removedOnCompletion = NO;
+//    keyFrameAnimation.fillMode = kCAFillModeForwards;
     keyFrameAnimation.values = valueArray;
     keyFrameAnimation.duration = duration;
     

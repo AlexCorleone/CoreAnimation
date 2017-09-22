@@ -28,16 +28,13 @@
 {
     if (!_popMenuView)
     {
-        self.popMenuView = [[WQKPopItemsMenuView alloc] initWithFrame:CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width, [UIScreen mainScreen].bounds.size.height - 100)];
-        [_popMenuView setTitleArray:@[@"title1", @"title2", @"title3", @"title4",
-                                      @"title5", @"title6", @"title7", @"title8"
-                                      ]];
+        self.popMenuView = [WQKPopItemsMenuView initWithFrame:CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width, [UIScreen mainScreen].bounds.size.height - 100)
+                                                   titleArray:@[@"title1", @"title2", @"title3", @"title4",@"title5", @"title6", @"title7", @"title8"]];
         __weak typeof(self)weakSelf = self;
         [_popMenuView setItemClickBlock:^(id target, NSUInteger index){
             __strong typeof (weakSelf)strongSelf = weakSelf;
             NSLog(@"-- %@ -- %ld -- ", target, index);
             [((UIButton *)[strongSelf.view viewWithTag:100001]) setSelected:NO];
-            
         }];
     }
     return _popMenuView;

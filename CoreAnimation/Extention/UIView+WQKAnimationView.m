@@ -178,7 +178,6 @@
 {
     CATransform3D fromValue = CATransform3DMakeRotation(0, 1, 0, 0);
     CATransform3D toValue = CATransform3DMakeRotation(M_PI, 1, 0, 0);
-
     CASpringAnimation *springAnimation = (CASpringAnimation *)[self flipAnimationViewFrom:fromValue toValue:toValue];
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(springAnimation.duration / 2. * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
         changeBlock();

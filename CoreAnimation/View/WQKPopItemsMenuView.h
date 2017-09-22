@@ -8,6 +8,12 @@
 
 #import <UIKit/UIKit.h>
 
+typedef enum : NSUInteger {
+    WQKPopItemsMenuViewDefaultDisappear,
+    WQKPopItemsMenuViewFallingDisappear,
+    WQKPopItemsMenuViewSmallerDisappear
+} WQKPopItemsMenuViewDisappear;
+
 @interface WQKPopItemsMenuView : UIView
 
 /*
@@ -27,5 +33,9 @@
  *item点击回调
  */
 @property (nonatomic, copy) void(^itemClickBlock)(id targetItem, NSUInteger index);
+
+- (instancetype)initWithFrame:(CGRect)frame titleArray:(NSArray <NSString *>*)titleArray;
+
++ (instancetype)initWithFrame:(CGRect)frame titleArray:(NSArray <NSString *>*)titleArray;
 
 @end

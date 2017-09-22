@@ -11,23 +11,27 @@
 #define tagBaseFlage 10000
 @interface WQKPopItemsMenuView ()
 
+@property (nonatomic, strong) UIButton *selectBtn;
 @property (nonatomic, strong) NSMutableArray <UIButton *> *btnArray;
 
 @end
 
 @implementation WQKPopItemsMenuView
 
-- (instancetype)initWithFrame:(CGRect)frame
+#pragma mark - Public Method
+- (instancetype)initWithFrame:(CGRect)frame titleArray:(NSArray <NSString *>*)titleArray
 {
-    self = [super initWithFrame:frame];
-    if (self)
-    {
-        [self setBackgroundColor:[UIColor whiteColor]];
-    }
+    self = [self initWithFrame:frame];
+    [self setTitleArray:titleArray];
     return self;
 }
 
-#pragma mark - Private Method
++ (instancetype)initWithFrame:(CGRect)frame titleArray:(NSArray <NSString *>*)titleArray
+{
+    return [[self alloc] initWithFrame:frame titleArray:titleArray];
+}
+
+#pragma mark - setter & getter
 - (void)setTitleArray:(NSArray<NSString *> *)titleArray
 {
     _titleArray = titleArray;
@@ -40,6 +44,7 @@
     [self isShowBtnAray:_isShowBtnList];
 }
 
+#pragma mark - Private Method
 - (NSArray *)createBtnArray
 {
     NSUInteger cout = 4;
@@ -76,14 +81,22 @@
         [tempBtn addTarget:self
                     action:@selector(itemBtnClick:)
           forControlEvents:UIControlEventTouchUpInside];
-        
         [self addSubview:tempBtn];
         [_btnArray addObject:tempBtn];
     }
     return _btnArray;
 }
 
-#pragma mark - Public Method
+- (void)itemBtnClick:(UIButton *)btn
+{
+    if (self.itemClickBlock)
+    {
+        self.selectBtn = btn;
+        [self isShowBtnAray:YES];
+        self.itemClickBlock(btn, btn.tag - tagBaseFlage);
+    }
+}
+
 - (void)isShowBtnAray:(BOOL)flag
 {
     for (UIButton *btn in self.btnArray)
@@ -92,28 +105,66 @@
         [btn.layer removeAnimationForKey:animationKey];
         if (!flag)
         {
-            CAKeyframeAnimation *animation = (CAKeyframeAnimation *)[self springIntoAnimationViewWith:WQKAnimationDerictionTop startPoint:CGPointMake(btn.center.x, btn.center.y + 100) endPoint:btn.center duration:0.6];
-            animation.timingFunction = [CAMediaTimingFunction functionWithControlPoints:0.82 :1.13 :0.7 :1.15];
-
+            CGFloat animationTime = 0.6;
+            CAKeyframeAnimation *springAnimation = (CAKeyframeAnimation *)[self springIntoAnimationViewWith:WQKAnimationDerictionTop startPoint:CGPointMake(btn.center.x, btn.center.y + 100) endPoint:btn.center duration:animationTime];
+            springAnimation.timingFunction = [CAMediaTimingFunction functionWithControlPoints:0.82 :1.13 :0.7 :1.15];
+            CABasicAnimation *alphaAnimation = (CABasicAnimation *)[self alphaAnimationViewWith:0.4 toOpacity:1. duration:animationTime - 0.4];
+            CAAnimationGroup *groupAnimation = [CAAnimationGroup animation];
+            [groupAnimation setAnimations:@[springAnimation, alphaAnimation]];
+            [groupAnimation setDuration:animationTime];
+            
             dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(((btn.tag - tagBaseFlage) * 0.1) * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
                 [btn setHidden:flag];
-                [btn.layer addAnimation:animation forKey:animationKey];
+                [btn.layer addAnimation:groupAnimation forKey:animationKey];
             });
         }else
         {
-            CAKeyframeAnimation *animation = (CAKeyframeAnimation *)[self springIntoAnimationViewWith:WQKAnimationDerictionBottom startPoint:btn.center endPoint:CGPointMake(btn.center.x, btn.center.y + 100) duration:0.3];
-            animation.calculationMode = kCAAnimationPaced;
-            
-            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(((_btnArray.count + tagBaseFlage - btn.tag) * 0.1) * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-                [btn.layer addAnimation:animation forKey:animationKey];
-                dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+            if (!self.selectBtn)
+            {
+                CGFloat animationTime = 0.15;
+                CAKeyframeAnimation *fallingAanimation = (CAKeyframeAnimation *)[self springIntoAnimationViewWith:WQKAnimationDerictionBottom startPoint:btn.center endPoint:CGPointMake(btn.center.x, btn.center.y + 100) duration:animationTime];
+                fallingAanimation.calculationMode = kCAAnimationPaced;
+                CABasicAnimation *alphaAnimation = (CABasicAnimation *)[self alphaAnimationViewWith:1. toOpacity:0. duration:animationTime];
+                CAAnimationGroup *groupAnimation = [CAAnimationGroup animation];
+                [groupAnimation setAnimations:@[fallingAanimation, alphaAnimation]];
+                [groupAnimation setDuration:animationTime];
+                
+                dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(((_btnArray.count + tagBaseFlage - btn.tag) * 0.08) * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+                    [btn.layer addAnimation:groupAnimation forKey:animationKey];
+                    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+                        [btn setHidden:flag];
+                    });
+                });
+            }else
+            {
+                CGFloat scale = 0.;
+                CGFloat animationTime = 0.3;
+                if ([self.selectBtn isEqual:btn])
+                {
+                    scale = 3.0;
+                }
+                CASpringAnimation *scaleAanimation = (CASpringAnimation *)[self springAnimationViewWith:scale duration:animationTime];
+                CABasicAnimation *alphaAnimation = (CABasicAnimation *)[self alphaAnimationViewWith:1. toOpacity:0. duration:animationTime];
+                CAAnimationGroup *groupAnimation = [CAAnimationGroup animation];
+                [groupAnimation setAnimations:@[scaleAanimation, alphaAnimation]];
+                [groupAnimation setDuration:animationTime];
+                [btn.layer addAnimation:groupAnimation forKey:animationKey];
+                __weak typeof(self)weakSelf = self;
+                //dispatch_after延时操作的时间不是很准确所以这里我将时间提前了几秒让动画隐藏
+                dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.25 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+                    __strong typeof(weakSelf)strongSelf = weakSelf;
+                    if ([strongSelf.selectBtn isEqual:btn])
+                    {
+                        [strongSelf setSelectBtn:nil];
+                    }
                     [btn setHidden:flag];
                 });
-            });
+            }
         }
     }
 }
 
+#pragma mark - Animations
 - (CAKeyframeAnimation *)springIntoAnimationViewWith:(WQKAnimationDerictionType)directionType
                                   startPoint:(CGPoint)startPoint
                                     endPoint:(CGPoint)endPoint
@@ -131,26 +182,42 @@
                    [NSValue valueWithCGPoint:CGPointMake(X, endY)],
                    [NSValue valueWithCGPoint:CGPointMake(X, backPointY)],
                    [NSValue valueWithCGPoint:CGPointMake(X, endY)],
-                   //                           [NSValue valueWithCGPoint:CGPointMake(X, advancePointY)],
-                   //                           [NSValue valueWithCGPoint:CGPointMake(X, endY)],
-                   //                           [NSValue valueWithCGPoint:CGPointMake(X, backPointY)],
-                   //                           [NSValue valueWithCGPoint:CGPointMake(X, endY)]
                    ];
     CAKeyframeAnimation *keyFrameAnimation = [CAKeyframeAnimation animationWithKeyPath:@"position"];
-//    keyFrameAnimation.removedOnCompletion = NO;
-//    keyFrameAnimation.fillMode = kCAFillModeForwards;
     keyFrameAnimation.values = valueArray;
     keyFrameAnimation.duration = duration;
-    
     return keyFrameAnimation;
 }
 
-- (void)itemBtnClick:(UIButton *)btn
+- (CAAnimation *)springAnimationViewWith:(CGFloat)scale duration:(CGFloat)duration;
 {
-    if (self.itemClickBlock)
-    {
-        [self isShowBtnAray:YES];
-        self.itemClickBlock(btn, btn.tag - tagBaseFlage);
-    }
+    CASpringAnimation *springAnimation = [CASpringAnimation animationWithKeyPath:@"transform"];
+    springAnimation.mass = 13.;
+    springAnimation.damping = 2;
+    springAnimation.stiffness = 500;
+    springAnimation.toValue = [NSValue valueWithCATransform3D:CATransform3DMakeScale(scale, scale, 1.0)];
+    springAnimation.duration = duration;
+    return springAnimation;
 }
+
+- (CABasicAnimation *)alphaAnimationViewWith:(CGFloat)fromOpacity toOpacity:(CGFloat)toOpacity duration:(CGFloat)duration
+{
+    CABasicAnimation *animation = [CABasicAnimation animationWithKeyPath:@"opacity"];
+    animation.fromValue = @(fromOpacity);
+    animation.toValue = @(toOpacity);
+    animation.duration = duration;
+    return animation;
+}
+
+#pragma mark - override
+- (instancetype)initWithFrame:(CGRect)frame
+{
+    self = [super initWithFrame:frame];
+    if (self)
+    {
+        [self setBackgroundColor:[UIColor whiteColor]];
+    }
+    return self;
+}
+
 @end

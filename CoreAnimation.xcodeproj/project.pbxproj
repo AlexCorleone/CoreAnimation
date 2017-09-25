@@ -15,6 +15,7 @@
 		296BFBA71F5E795A009010B2 /* CoreAnimationTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 296BFBA61F5E795A009010B2 /* CoreAnimationTests.m */; };
 		296BFBB21F5E795A009010B2 /* CoreAnimationUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 296BFBB11F5E795A009010B2 /* CoreAnimationUITests.m */; };
 		296BFBC21F5E7B43009010B2 /* WQKAnimationVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 296BFBC11F5E7B43009010B2 /* WQKAnimationVC.m */; };
+		296C41921F78E9C5003F1325 /* WQKVerticalButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 296C41911F78E9C5003F1325 /* WQKVerticalButton.m */; };
 		298D0F841F5E7DCD001ACDCB /* WQKAnimationView.m in Sources */ = {isa = PBXBuildFile; fileRef = 298D0F831F5E7DCD001ACDCB /* WQKAnimationView.m */; };
 		298D0F8C1F5F8894001ACDCB /* UIView+WQKAnimationView.m in Sources */ = {isa = PBXBuildFile; fileRef = 298D0F8B1F5F8894001ACDCB /* UIView+WQKAnimationView.m */; };
 		29B02F471F5FD78400416D6F /* WQKLayerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 29B02F461F5FD78400416D6F /* WQKLayerView.m */; };
@@ -64,6 +65,8 @@
 		296BFBB31F5E795A009010B2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		296BFBC01F5E7B43009010B2 /* WQKAnimationVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WQKAnimationVC.h; sourceTree = "<group>"; };
 		296BFBC11F5E7B43009010B2 /* WQKAnimationVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WQKAnimationVC.m; sourceTree = "<group>"; };
+		296C41901F78E9C5003F1325 /* WQKVerticalButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WQKVerticalButton.h; sourceTree = "<group>"; };
+		296C41911F78E9C5003F1325 /* WQKVerticalButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WQKVerticalButton.m; sourceTree = "<group>"; };
 		298D0F821F5E7DCD001ACDCB /* WQKAnimationView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WQKAnimationView.h; sourceTree = "<group>"; };
 		298D0F831F5E7DCD001ACDCB /* WQKAnimationView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WQKAnimationView.m; sourceTree = "<group>"; };
 		298D0F8A1F5F8894001ACDCB /* UIView+WQKAnimationView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+WQKAnimationView.h"; sourceTree = "<group>"; };
@@ -150,6 +153,7 @@
 		296BFB881F5E7959009010B2 /* CoreAnimation */ = {
 			isa = PBXGroup;
 			children = (
+				296C418F1F78E9C5003F1325 /* Tool */,
 				298D0F891F5F87E3001ACDCB /* Extention */,
 				298D0F811F5E7D89001ACDCB /* Model */,
 				298D0F801F5E7D79001ACDCB /* View */,
@@ -204,6 +208,15 @@
 				29BA1E4A1F60D7E800097635 /* WQKLayerVC.m */,
 			);
 			path = ViewController;
+			sourceTree = "<group>";
+		};
+		296C418F1F78E9C5003F1325 /* Tool */ = {
+			isa = PBXGroup;
+			children = (
+				296C41901F78E9C5003F1325 /* WQKVerticalButton.h */,
+				296C41911F78E9C5003F1325 /* WQKVerticalButton.m */,
+			);
+			path = Tool;
 			sourceTree = "<group>";
 		};
 		298D0F7F1F5E7D64001ACDCB /* ViewModel */ = {
@@ -560,6 +573,7 @@
 				298D0F841F5E7DCD001ACDCB /* WQKAnimationView.m in Sources */,
 				296BFB971F5E7959009010B2 /* CoreAnimation.xcdatamodeld in Sources */,
 				298D0F8C1F5F8894001ACDCB /* UIView+WQKAnimationView.m in Sources */,
+				296C41921F78E9C5003F1325 /* WQKVerticalButton.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

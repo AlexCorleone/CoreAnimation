@@ -19,8 +19,8 @@
     self.window = [[UIWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];
     [_window setBackgroundColor:[UIColor darkGrayColor]];
     ;
-    [_window setRootViewController:[[UINavigationController alloc] initWithRootViewController:[NSClassFromString(@"WQKAnimationVC") new]]];
-//    [_window setRootViewController:[[UINavigationController alloc] initWithRootViewController:[NSClassFromString(@"WQKWeiBoPopMenuVC") new]]];
+//    [_window setRootViewController:[[UINavigationController alloc] initWithRootViewController:[NSClassFromString(@"WQKAnimationVC") new]]];
+    [_window setRootViewController:[[UINavigationController alloc] initWithRootViewController:[NSClassFromString(@"WQKWeiBoPopMenuVC") new]]];
 
     [_window makeKeyAndVisible];
     return YES;

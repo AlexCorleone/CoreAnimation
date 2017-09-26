@@ -73,6 +73,16 @@
     btn.selected = !btn.selected;
 }
 
+#pragma mark - WQKPopItemsMenuViewDelegate
+- (UIView *)wqkCustomViewForShowItem
+{
+    UIView *showItemView = [UIView new];
+    UITapGestureRecognizer *tapGes = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(gestueClick:)];
+    [showItemView addGestureRecognizer:tapGes];
+    return showItemView;
+}
+
+
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];

@@ -12,7 +12,7 @@
 @interface WQKPopItemsMenuView ()
 
 @property (nonatomic, strong) UIButton *selectBtn;
-@property (nonatomic, strong) NSMutableArray <UIButton *> *btnArray;
+@property (nonatomic, strong) NSMutableArray <UIView *> *btnArray;
 
 @end
 
@@ -68,21 +68,21 @@
         NSUInteger verticalNumber = i / cout;
         CGFloat X = (space + btnWith) * levelNumber + space;
         CGFloat Y = (screenHeight - bottomSapce) - ((totleNumber - (verticalNumber + 1)) * space + btnWith * (totleNumber - verticalNumber));
-        UIButton *tempBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-        [tempBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-        [tempBtn setTitle:titleArray[i] forState:UIControlStateNormal];
-        [tempBtn.titleLabel setFont:[UIFont systemFontOfSize:15]];
-        [tempBtn setFrame:CGRectMake(X, Y, btnWith, btnWith)];
-        [tempBtn setBackgroundColor:bgColorArray[i]];
-        [tempBtn.layer setCornerRadius:btnWith / 2.];
-        [tempBtn setClipsToBounds:YES];
-        [tempBtn setHidden:YES];
-        [tempBtn setTag:tagBaseFlage + i];
-        [tempBtn addTarget:self
-                    action:@selector(itemBtnClick:)
-          forControlEvents:UIControlEventTouchUpInside];
-        [self addSubview:tempBtn];
-        [_btnArray addObject:tempBtn];
+            UIButton *tempBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+            [tempBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+            [tempBtn setTitle:titleArray[i] forState:UIControlStateNormal];
+            [tempBtn.titleLabel setFont:[UIFont systemFontOfSize:15]];
+            [tempBtn setFrame:CGRectMake(X, Y, btnWith, btnWith)];
+            [tempBtn setBackgroundColor:bgColorArray[i]];
+            [tempBtn.layer setCornerRadius:btnWith / 2.];
+            [tempBtn setClipsToBounds:YES];
+            [tempBtn setHidden:YES];
+            [tempBtn setTag:tagBaseFlage + i];
+            [tempBtn addTarget:self
+                        action:@selector(itemBtnClick:)
+              forControlEvents:UIControlEventTouchUpInside];
+            [self addSubview:tempBtn];
+            [_btnArray addObject:tempBtn];
     }
     return _btnArray;
 }

@@ -708,7 +708,7 @@
 				GCC_PREFIX_HEADER = "$(SRCROOT)/CoreAnimation/Header.h";
 				INFOPLIST_FILE = CoreAnimation/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.Alex.singItonToolClassAlex;
+				PRODUCT_BUNDLE_IDENTIFIER = AlexCorleone.AboutReactiveCocoaAlex;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 			};
@@ -724,7 +724,7 @@
 				GCC_PREFIX_HEADER = "$(SRCROOT)/CoreAnimation/Header.h";
 				INFOPLIST_FILE = CoreAnimation/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.Alex.singItonToolClassAlex;
+				PRODUCT_BUNDLE_IDENTIFIER = AlexCorleone.AboutReactiveCocoaAlex;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 			};
